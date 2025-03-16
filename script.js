@@ -20,21 +20,19 @@ function draw() {
     ctx.fillRect(food.x, food.y, box, box);
 
     ctx.fillStyle = "lime";
-    snake.forEach((part, index) => {
-        ctx.fillRect(part.x, part.y, box, box);
-        if (index > 0 && part.x === snake[0].x && part.y === snake[0].y) resetGame();
-    });
+    snake.forEach(part => ctx.fillRect(part.x, part.y, box, box));
 
     moveSnake();
 }
 
 function moveSnake() {
-    const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+    let head = { x: snake[0].x + dx, y: snake[0].y + dy };
 
-    if (head.x < 0 || head.y < 0 || head.x >= canvas.width || head.y >= canvas.height) {
-        resetGame();
-        return;
-    }
+    // **Wall Wrapping Logic**
+    if (head.x < 0) head.x = canvas.width - box;  // Left to Right
+    if (head.x >= canvas.width) head.x = 0;       // Right to Left
+    if (head.y < 0) head.y = canvas.height - box; // Top to Bottom
+    if (head.y >= canvas.height) head.y = 0;      // Bottom to Top
 
     snake.unshift(head);
 
@@ -50,13 +48,6 @@ function changeDirection(direction) {
     if (direction === "down" && dy === 0) { dx = 0; dy = box; }
     if (direction === "left" && dx === 0) { dx = -box; dy = 0; }
     if (direction === "right" && dx === 0) { dx = box; dy = 0; }
-}
-
-function resetGame() {
-    snake = [{ x: 200, y: 200 }];
-    dx = box;
-    dy = 0;
-    food = { x: getRandomPosition(), y: getRandomPosition() };
 }
 
 setInterval(draw, 100);
