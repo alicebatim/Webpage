@@ -28,7 +28,7 @@ function draw() {
 function moveSnake() {
     let head = { x: snake[0].x + dx, y: snake[0].y + dy };
 
-    // **Wall Wrapping Logic**
+    // Wall Wrapping Logic
     if (head.x < 0) head.x = canvas.width - box;  // Left to Right
     if (head.x >= canvas.width) head.x = 0;       // Right to Left
     if (head.y < 0) head.y = canvas.height - box; // Top to Bottom
@@ -49,5 +49,15 @@ function changeDirection(direction) {
     if (direction === "left" && dx === 0) { dx = -box; dy = 0; }
     if (direction === "right" && dx === 0) { dx = box; dy = 0; }
 }
+
+// Attach both click and touch events
+["up", "down", "left", "right"].forEach(dir => {
+    const button = document.getElementById(dir);
+    button.addEventListener("click", () => changeDirection(dir));
+    button.addEventListener("touchstart", (e) => {
+        e.preventDefault(); // Prevent ghost taps
+        changeDirection(dir);
+    });
+});
 
 setInterval(draw, 100);
