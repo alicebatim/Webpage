@@ -5,7 +5,9 @@ the aim of the project is to experiment with creating a snake game playable on a
 
 I will investigate where to host the website
 
-version 1 : created snake game within spaces.w3schools.com hosted at nakes.w3spaces.com
-version 2 : created here within github and hosted on GitHub spaces
-testing a change using visual studio code
+version 1 : created snake game within spaces.w3schools.com hosted at https://nakes.w3spaces.com
+
+version 2 : created here within github and hosted on GitHub-pages https://alicebatim.github.io/Webpage/
+
+version 3 : ...
     
